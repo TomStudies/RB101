@@ -1,0 +1,9 @@
+
+welcome: "Welcome to the Calculator! Enter your name."
+valid: "Be sure to use a valid name."
+first: "What's the first number?"
+second: "What's the second number?"
+invalid: "Invalid entry."
+choose: "Must choose 1, 2, 3, 4"
+again?: "Do you want to perform another calculation? (Y to calculate again)"
+bye: "Goodbye!"
