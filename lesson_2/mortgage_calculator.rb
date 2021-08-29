@@ -1,6 +1,7 @@
 # Gather loan amount, APR, and loan duration from user.
-# Calculate monthly interest rate, loan duration, and monthly payment. (formula provided by LS: m = p * (j / (1 - (1 + j)**(-n))) )
-# m = monthly payment, p = loan amount, j = monthly interest rate, n = duration in months
+# Calculate monthly interest rate, loan duration, and monthly payment. 
+# (formula provided by LS: m = p * (j / (1 - (1 + j)**(-n))) )
+# m = monthly payment, p = loan amount, j = monthly interest rate, n = months
 # PEDAC:
   # Input: loan amount (float), APR (float), loan duration (years int)
   # Output: monthly interest rate % (float), loan duration (months int), monthly payment (float rounded to two decimal)
@@ -24,13 +25,13 @@ def valid_int?(input)
   input.to_i.to_s == input && input.to_i >= 0
 end
 
-def valid_float?(input)
-  (input.to_f.to_s == input || (input.to_f.to_s + "0") == input) && (input.to_f * 100) % 1 == 0.0 && input.to_f >= 0
+def valid_float?(input) # I had a lot of issues with weird edge case errors here, so this is my convoluted effort to stifle them. It... kind of works?
+  (input.to_f.to_s == input || ("#{input.to_f}0") == input) && input.to_f >= 0
 end
 
 Kernel.puts("This calculator can determine monthly interest rate, loan duration, and monthly payment.")
 loop do
-  Kernel.puts("Please input the total loan amount without commas up to two decimal places. (For example, for a $10,025.50 loan, enter 10025.50)")
+  Kernel.puts("Please input the total loan amount without commas (including cents.) (For example, for a $10,025.50 loan, enter 10025.50, and for a $1000 loan, enter 1000.00)")
   amount = ''
   loop do
     amount = Kernel.gets().chomp()
@@ -40,7 +41,7 @@ loop do
       puts("Your input is invalid. Please check and try again.")
     end
   end
-  
+
   Kernel.puts("Please input the APR to two decimal places. (For example, for a 5.85% APR, enter 5.85)")
   apr = ''
   loop do
@@ -51,7 +52,7 @@ loop do
       puts("Your input is invalid. Please check and try again.")
     end
   end
-  
+
   Kernel.puts("Finally, please input the duration of the loan in years. (For example, for 12 years, enter 12)")
   years = ''
   loop do
@@ -62,13 +63,12 @@ loop do
       puts("Your input is invalid. Please check and try again.")
     end
   end
-  
+
   monthly = monthly_interest(apr.to_f())
   months = loan_months(years.to_i())
-  Kernel.puts("Monthly interest: $#{monthly.round(2)}")
+  Kernel.puts("Monthly interest: #{monthly.round(2)}%")
   Kernel.puts("Loan duration in months: #{months}")
-  Kernel.puts("Monthly payment: $#{(monthly_payment(amount.to_f(), monthly, months)).round(2)}")
-  
+  Kernel.puts("Monthly payment: $#{format('%.2f', monthly_payment(amount.to_f(), monthly, months))}")
   Kernel.puts("\nPress Y to perform another calculation.")
   another = Kernel.gets().chomp()
   if another.downcase != 'y'
@@ -77,4 +77,3 @@ loop do
   
 end
 
-# Things to work on tomorrow: Weird bug in the valid_float method invalidating 10025.20, proper decimal rounding on return values.
