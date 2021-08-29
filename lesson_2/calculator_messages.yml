@@ -1,9 +1,17 @@
-
-welcome: "Welcome to the Calculator! Enter your name."
-valid: "Be sure to use a valid name."
-first: "What's the first number?"
-second: "What's the second number?"
-invalid: "Invalid entry."
-choose: "Must choose 1, 2, 3, 4"
-again?: "Do you want to perform another calculation? (Y to calculate again)"
-bye: "Goodbye!"
+# reogrganizing for an international audience
+en:
+  welcome: "Welcome to the Calculator! Enter your name."
+  first: "What's the first number?"
+  second: "What's the second number?"
+  invalid: "Invalid entry."
+  choose: "Must choose 1, 2, 3, 4"
+  again?: "Do you want to perform another calculation? (Y to calculate again)"
+  bye: "Goodbye!"
+zh: # I know a little mandarin, but I mostly just used google translate.) I was curious if non english characters would work.
+  welcome: "欢迎来到计算器！输入您的姓名。"
+  first: "第一个数字是什么？"
+  second: "第二个数字是什么？"
+  invalid: "无效条目。"
+  choose: "必须选 1, 2, 3, 4"
+  again?: "您是否要执行其他计算？ (Y 再次计算)"
+  bye: "再见！"

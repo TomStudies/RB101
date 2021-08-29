@@ -36,12 +36,27 @@ def operation_to_message(op)
   word
 end
 
-prompt(MESSAGES['welcome'])
+def messages(message, lang='en')
+  MESSAGES[lang][message] # I only implemented partial language support. I am not sure how to do YAML file entry for certain parts.
+end
+
+prompt("Please select your language. (EN, ZH)")
+lang = ''
+loop do
+  lang = Kernel.gets().chomp().downcase()
+  if lang.empty?() || (lang != 'zh' && lang != 'en')
+    prompt(MESSAGES['en']['invalid'])
+  else
+    break
+  end
+end
+
+prompt(messages('welcome',lang))
 name = ''
 loop do
   name = Kernel.gets().chomp()
   if name.empty?()
-    prompt(MESSAGES['valid'])
+    prompt(messages('invalid',lang))
   else
     break
   end
@@ -51,22 +66,22 @@ loop do # Main loop
   number1 = 0
   number2 = 0
   loop do
-    prompt(MESSAGES['first'])
+    prompt(messages('first',lang))
     number1 = Kernel.gets().chomp()
     if number?(number1)
       break
     else
-      prompt(MESSAGES['invalid'])
+      prompt(messages('invalid',lang))
     end
   end
 
   loop do
-    prompt(MESSAGES['second'])
+    prompt(messages('second',lang))
     number2 = Kernel.gets().chomp()
     if number?(number2)
       break
     else
-      prompt(MESSAGES['invalid'])
+      prompt(messages('invalid',lang))
     end
   end
 
@@ -87,7 +102,7 @@ What operation would you like to perform?
     if %w(1 2 3 4).include?(operator)
       break
     else
-      prompt(MESSAGES['choose'])
+      prompt(messages('choose',lang))
     end
   end
 
@@ -106,12 +121,12 @@ What operation would you like to perform?
 
   prompt("The result is #{result}.")
 
-  prompt(MESSAGES['again?'])
+  prompt(messages('again?',lang))
   answer = Kernel.gets().chomp()
   break unless answer.downcase().start_with?('y')
 end
 
-prompt(MESSAGES['bye'])
+prompt(messages('bye',lang))
 
 # Keep in mind, if expressions can return a value.
 # answer = if true
