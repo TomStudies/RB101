@@ -1,0 +1,85 @@
+PASS BY REFERENCE VS PASS BY VALUE
+
+Pass by value means that methods can only access copies of original objects. Operations performed within the method don't affect the original object.
+  Some say that Ruby is PBV because re-assignment of an object within a method it is passed to does not affect the oroginal object outside that method.
+
+Pass by reference means that methods access the original object and can change it via operations performed there.
+  Ruby cannot be purely PBV, because it is possible to change the original object with a method (for instance, calling String#capitalize! within a method on a passed in string)
+
+Ruby does a combination of both behaviors some call "pass by value of the reference" and some call "call by sharing".
+
+When an operation within the method mutates the caller, it will affect the original object.
+
+Many methods that mutate the caller end with a !, but this is not a guarantee. Array#<< mutates the caller, for instance.
+
+Re-assignment is NOT considered a destructive operation!
+
+VARIABLES AS POINTERS
+
+Variables don't actually contain values, but they contain pointers to areas in memory which contain values, they act as labels for specific physical memory addresses.
+
+So if we use String#<< on a variable, all the other variables that point to that same memory space will also be modified (it mutates the caller.)
+
+The = operator points the variable to different addresses in memory. (Re-assignment)
+
+Mutating the caller changes the value in the object's address space.
+
+VARIABLE REFERENCES AND MUTABILITY OF OBJECTS
+
+Every object in Ruby has a unique object id, and that id can be retrieved to examine what object is being pointed to with Object#object_id.
+
+In Ruby, numbers and boolean values are immutable. Equations are simply reassignments, where the variable ends up pointed to a different address. nil, Range objects, and others are also immutable.
+  *Any class can become immutable so long as it doesn't provide any methods that alter its state.
+
+Most objects in Ruby, however, are mutable.
+
+Setter methods are those that allow a programmer to explicitly change the value of the object.
+  *For example, the Array#[] method can mutate a pre defined array by changing the value at any index. The object_id will remain the same.
+
+In reality, the elements that Array objects contain are also references to other objects.
+
+When passing immutable objects, Ruby acts as though it is using pass by value.
+
+Mutable objects are treated as though they are passed by reference (these statements are not completely accurate but helpful for general understanding.)
+
+RUBY OBJECT'S MUTATING AND NON-MUTATING METHODS
+
+When discussing whether a method is mutating or not, the object of the mutation is important to keep track of.
+  *For example, String#sub! mutates the string used to call it, but not its arguments. Only a few methods mutate their arguments.
+  
+= is not an actual Ruby method, but it acts like a non-mutating method (as it binds an object to a variable.)
+
+Setter methods for class instance variables and indexed assignment (?) are not the same as assignment in that they usually mutate the calling object.
+
+Indexed assignment is used by String, Hash, and Array objects and is mutating.
+  For instance, hash[:age] = 23 is mutating.
+  The collection element itself is bound to a new object, but the collection remains pointing to the same object id.
+
+Remember: += is non mutating. << is (at least in the context of strings, arrays, and hashes. Some other classes use it for bit shift or other things that will need to be checked in documentation as to whether it is mutating or not.)
+
+Setter methods alter the state of the object in question, and are mutating.
+
+OBJECT PASSING IN RUBY
+
+In Ruby, when a method is called with an argument, that expression is evaluated and reduced to an object, which is then made available (passed) inside the method.
+
+The caller of a method can also be thought of as an implied argument, and as such it also is passed as an object.
+
+The same goes for return values, blocks, procs, lambdas, etc.
+
+Many operators are methods (+, *, [] to name a few) and many that aren't act like methods. Their operands are arguments and return values that are passed around just like other methods.
+
+Strict evaluation, wherein each expression is evaluated and converted to an object before being passed on to a method, is what Ruby uses.
+
+Pass by value and pass by reference are the two most common strict evaluation strategies.
+
+Even literals, when passed to methods, will be converted to objects and have references created for them (these can be thought of as anonymous references.)
+
+When we pass an immutable object to a method, it will reference the same object despite itself being immutable.
+  *References may be passed, even when those references are not guarantees that the objects themselves can be mutated.
+
+We could consider Ruby to be pass by reference only and not be wrong. But assignment is a mutating operation in pass by reference languages, which it isn't in Ruby.
+
+What really happens in Ruby is that Ruby passes copies of references to methods. These references can be used to mutate the referenced object, but the reference itself is a copy.
+  *We can maybe call this pass by reference value, or pass by value of the reference. It is a blend of the two strategies.
+

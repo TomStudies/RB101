@@ -1,0 +1,55 @@
+Figured I'd start taking notes on the various articles in LS corriculum.
+
+Different types of variables have different types of scopes.
+
+Scope is defined by where the variable is created(initialized.)
+
+for LOCAL VARIABLES:
+
+Methods have self contained scope. Variables not initialized within the body of the method can't be referred to, and methods initialized outside the method can't be accessed within.
+
+Blocks can access variables initialized elsewhere, but variables initialized within the block cannot be accessed outside.
+
+Generally, inner scopes can access variables initialized outside of them, but not vice versa.
+
+do...end code attached to a for loop do not create new inner scopes. For is just part of the ruby language and doesn't invoke any methods or blocks that would theoretically change scope.
+
+Rubyists use do..end for multi line blocks, and {..} for single line blocks.
+
+Change performed on an outer scope variable within an inner scope takes affect even in the outer scope.
+
+Blocks that take place on the same "scope level" (peer blocks) cannot use variables initialized within each other.
+
+Nested blocks work pretty much as expected (outer can't access inner)
+
+Variable shadowing (where the inner scope variable has the same name as an outer scope variable) prevents the outer scope variable from being accessed or changed. The inner one takes precedence.
+  *Variable shadowing is to be avoided. Long and descriptive variable names should mean that you don't have to deal with confusing scope issues.
+  
+If a local variable and a method share the same name, Ruby will default to the variable unless parentheses are included on the method call that would indicate that it is a method.
+
+for CONSTANTS:
+
+Contents have "lexical scope". Basically, they can be accessed within methods and blocks, or within an outer scope even when initialized in an inner one.
+
+MORE VARIABLE SCOPE
+
+Method definition is when Ruby methods are defined using the def keyword.
+
+Method invocation is when we call a method, either an existing one provided by Ruby's Core API or core library, or one we have defined ourselves with def.
+
+Methods are called very frequently with blocks, "but the block is only executed if the method is defined in a particular way." (??)
+
+A block called with a method is part of the method invocation. Blocks are defined by "method invocation followed by curly braces or do..end."
+
+In these cases, blocks act as arguments to the method, just as a local variable can.
+
+The yield keyword controls interactions of methods with blocks supplied to them. The important part is that blocks and methods can interact with each other, to a level defined in the method definition and used at invocation.
+
+Methods can also use return values of blocks to perform actions.
+
+Because a block can aaccess local variables initialized outside the block, methods can access local variables if a block acts as a mediator for this action.
+
+We can therefore think of method definition as defining scope for any local variables by setting what parameters the definition has, what it does with those perameters, and if/how it interacts with blocks.
+  *Method invocation simply uses that scope.
+  *Scopes of accessed blocks provide additional flexibility as to how the method can interact with variables.
+
