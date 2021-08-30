@@ -1,0 +1,3 @@
+&& has higher precedence than ||
+Methods never try to reference local variables outside their scope, they don't really even know they exist.
+Precedence doesn't exist from top to bottom in ruby as far as determining what to invoke.
