@@ -1,0 +1,23 @@
+Rubocop often looks out for new lines in code. This is by design, we need to organize chunks in the most readable ways possible.
+
+Methods have side effects if they display something or mutate an object, etc. Pay attention to methods and whether they return something or have side effects. Both is generally a red flag.
+
+Good method names help one remember what they do.
+  If a method outputs, start it with print_ or display_
+  If you find yourself repeatedly checking a method's implementation every time it is used, it is a sign that the method should be improved.
+  If a method mutates something, consider ending it in !
+
+Be sure to create methods that just do one thing (mutate, or output, or return a meaningful value.)
+
+Do not mutate a collection while iterating through it. Behavior when doing this is erratic.
+  Instead, mutate the elements of said collection.
+
+When choosing block variables (the thing what goes between the || in a block) pick names that are different from outer scope variables to avoid variable shadowing.
+
+Don't use assignment in a conditional. It is unclear whether you intended to use == or not, and decreases readability.
+  *If you absolutely must, at least put it in paremtheses, to signify to future you or other programmers that you actually meant to do it.
+
+When iterating through something and dealing with unused parameters, represent them with an underscore.
+
+Struggling through bad or sub-optimal solutions to problems is just gaining experience, and teaches WHAT about those ways of working is bad.
+
