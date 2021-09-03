@@ -1,0 +1,39 @@
+Collections are made up of elements.
+
+Strings: 
+-Use an integer based index that starts at 0 to represent each character.
+-if str = 'abcde', str[2] would refer to 'c'. str[2, 3] would refer to 'cde' (3 characters starting from index 2.)
+  -The second example is just alternative syntax for str.slice(2,3).
+  -Thanks to method chanining, str[2,3][0] would be 'c'.
+
+Arrays: 
+-Use an integer based index that starts at 0 to hold a list of elements (the elements can be any object.)
+-if arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g'], then arr[2] would be 'c'. Similarly to the string, arr[2, 3] would be ['c', 'd', 'e'].
+  -Again, the second example is alternative syntax for Array#slice, which differs from String#slice (they return different objects.)
+  -arr.slice(3, 1) and arr.slice(3..3) will both return ['c'], but arr.slice(3) will return 'c'.
+  -Be careful what specific objects method calls return, either arrays or elements of them.
+
+Hash: 
+-Do not use an integer based index, instead use key value pairs. The key and value can be any kind of object.
+-If hsh = { 'fruit' => 'apple', 'vegetable' => 'carrot' }, hsh['fruit'] would return its pair, 'apple'.
+The keys of hashes must be unique. Duplicate keys are overwritten by the later keys in the hash.
+The values of hashes can be duplicated as many times as you like.
+Hash#keys and Hash#values can be used to return arrays of the keys or values, respectively.
+  *Using symbols (basically immutable strings) as hash keys is common practice and has a number of advantages.
+  
+Common 'Gotchas' for referencing elements in collections:
+-Referencing indexes out of bounds for a string or array will return nil. Arrays can contain nil as a valid value, so this is sometimes confusing.
+  -To get around this, try using Array#fetch, which returns the element at the index but throws an error if the referenced index is outside of the array.
+  -Basically, just be careful if you see #[] returning a nil.
+-Negative indeces are legitimate. They will work backwards from the last item in the collection, starting with -1. They also return nil if beyond the collection bounds.
+-Hash#fetch is similarly useful to Array#fetch, in that it throws an error if the queried key does not exist in the hash (instead of nil for #[].
+-Converting from string to array and vice versa are common and there are many methods that do this.
+  -String#chars returns an array of the individual characters of the string (ignores whitespaces by default, other delimeters can be specified)
+  -Array#join returns a string with the elements of the array joined together (can add a separator parameter)
+-Hash#to_a returns a multi dimensional array wherein each hash pair is seen as an array of its own.
+-Array#to_h (without a block) must be formatted as a multi dimensional array to be converted to hash.
+
+Elemental Assignment
+-Strings perform elemental assignment via their index. str[0] = 'j' would change the first character in a string to j. It is destructive.
+-Arrays perform elemental assignment via their index as well. arr[0] += 1 would add 1 to the first element in array arr (shorthand for arr[0] = arr[0] + 1, destructive)
+-Hash element assignment is done via the hash key to change its associated value.

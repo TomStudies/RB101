@@ -1,0 +1,45 @@
+P - Understand the problem
+E - Examples / tests
+D - Data structure
+A - Algorithm
+C - Code
+
+P - Understand the problem (E implied in these steps)
+  -Read the problem, examine the test cases, and clarify any unclear points.
+  -Many assumptions need to be clarified: whether to return the same or a different object, whether to consider case, what kinds of inputs a method should accept or reject, etc.
+  -Finally, WRITE down inputs and outputs, as well as rules you must follow (basically what you learned from your clarifications and test cases.)
+    -Split rules into explicit and implicit ones.
+  
+D - Data structure
+  -Simply determine what structures your data will be transferred through and take during the execution of your...
+
+A- Algorithm
+  -Use prior steps to outline the actual code by which you will accomplish the goal (in plain English.)
+  -Perhaps start at higher levels of abstraction, then focus in for smaller details and concepts.
+  -For those concepts, consider making individual helper methods. Always outline the algorithm before coding.
+  -For particularly complex concepts, consider converting to formal pseudocode.
+
+C- Actually code the problem!
+  -Fairly straight forward. Check the LS lesson 4 PEDAC section for a very detailed example.
+
+Extra: Testing Frequently
+  -Test code early and often while writing.
+  -If you wait until you're done with a whole section of code before testing, you'll find bugs when they appear and won't have to trap them later on.
+
+==============
+PEDAC VIDEOS
+P - Establish a frame of reference for the problem and determine the best path to a solution
+  -This is the step where the boundaries of the problem are defined and rules are established
+  -Making a list of rules/requirements is an important step to understanding the problem
+    -Explicit: Stated in the problem description, Implicit: Seen from test cases, etc
+  -Do not rush this step. It is important to clearly understand the problem.
+
+Example:
+Given a string, produce a new string with every other word removed.
+Input: string
+Output: new string
+Rule: Remove every other word from input string (explicit)
+Even an example this simple may raise questions.
+  -What does every other word mean? Start with the first or the second?
+  -How do we define a word? separated by spaces?
+    -Asking these kinds of questions help us to form the implicit requirements of the problem.

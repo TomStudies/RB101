@@ -1,0 +1,19 @@
+-Loops are a great way to iterate over many elements in a collection.
+
+-Kernel#loop method accepts a block for a simple loop.
+  -break key word ends loop.
+  -Counter variables are sometimes necessary (initialized outside) to control loops.
+  -break if (conditional) is common.
+
+-Placing break at the END of a loop mimics do/while loop behavior (C++ flashbacks)
+  -do/while loops are guaranteed to execute at least once.
+-Placing break at the beginning of the loop mimics a while loop.
+  -The loop may not execute at all, depending on the state of the break statement.
+
+-next keyword can also control loops by skipping to the next iteration.
+  -next if counter.odd? would check if the int counter is odd and skip to the next iteration if so.
+
+-Iterating over hashes is a little more complicated than strings or arrays.
+  -We can frequently use the Hash#keys method to create an array of all the keys in the hash, and use that to reference values.
+  -You have to iterate over both the keys array and the hash itself in tandem along the loop.
+
