@@ -1,0 +1,67 @@
+Methods
+
+Ruby's each, select, and map methods provide alternative ways to iterate over collections.
+
+The each method is basically equivalent to using loop, but represents a simpler way to accomplish that task.
+
+each takes a block, which is executed for each iteration over the current value of the element in the form of an argument.
+  -In the case of hashes, two arguments are needed to represent both the key and the value.
+
+One big difference between each and loop is the return value:
+  -each returns the original collection!
+  
+select performs a selection operation and extracts objects from collections that meet certain criteria.
+  .select evaluates the return value of the block, which is evaluated on each iteration.
+  select cares about the truthiness of the block's return value: everything but nil and false are truthy.
+  The return value of select is any element who, when subjected to the block, returns a truthy value, all jammed into a new collection.
+    Therefore, you must always be careful what the block is returning. If it returns nil, it will result in an empty collection!
+    
+map is similar to select in that it relies on the return value of the block. However, map performs transformation on the elements as opposed to selection.
+  The return value is a new collection with the transformation performed.
+  map ALWAYS performs transformation based on the return value of the block. It can even change the type of data held in the array.
+  
+Which collections have what is a little complicated:
+  Array and Hash both have an each method.
+  Enumerable (a module available to Array and Hash) contains select and map.
+  Strings are different in that they do not have access to Enumerable. However, converting a string to an array with String#split is a great way to access these methods.
+
+See table in lesson 4.8: Methods
+
+===============================
+More Methods
+
+Here are a couple of commonly used ruby methods and how they work.
+
+Enumerable#any?
+  Evaluates a collection based on a block. If any of the objects in the collection return a truthy value from the block, any? returns true.
+
+Enumerable#all?
+  Evaluates a collection based on a block. If all of the objects in the collection return a truthy value from the block, all? returns true.
+  
+Enumerable#each_with_index
+  Nearly identical to each, but provides a second argument to the block representing the index of each element.
+  Hashes become multidimensional arrays when passed in.
+  
+Enumerable#each_with_object(argument)
+  Takes a method argument, a collection object that will be returned. For instance, a blank array.
+  The block takes the current element of the iteration, and a second object representing the method argument. An action is performed upon the method argument based on the current element.
+  The method argument is ultimately returned when iteration completes.
+  Hashes become multidimensional arrays when passed in.
+  
+Enumerable#first
+  Takes an optional argument of the number of elements to return (default 1) and returns them.
+  For a hash, the first number of key value pairs are provided, others the first number of elements.
+    Ruby hashes order was completely unpreserved until 1.9, and most hashes aren't thought of as having order, so this behavior is interesting.
+    The return for a hash is a nested array, to turn it back into a hash add #to_h
+  
+Enumerable#include?
+  Returns true if its argument is contained within the collection, false otherwise.
+  Hash#include? only checks the keys, not the values. It is basically an alias for #key? and #has_key?
+    Ruby style guide recommends to use #key?
+    For values, use #value? (recommended) or #has_value?
+      
+Enumerable#partition
+  Divides up elements in the current collection to two collections depending on the return value of a block.
+  An array will return a nested array, with the original array split into two based on the block.
+    Parallel assigning variables to the partition call is a great way to get the array sin separate variables.
+    Hash will also return a nested array. Remember to use #to_h to convert back if necessary.

@@ -43,3 +43,40 @@ Even an example this simple may raise questions.
   -What does every other word mean? Start with the first or the second?
   -How do we define a word? separated by spaces?
     -Asking these kinds of questions help us to form the implicit requirements of the problem.
+    
+E - Examples and test cases
+  -Use them to answer questions we have about the implicit requirements of a problem
+  -Also confirm our assumptions
+  -Help to codify the boundaries of the problem
+
+-If none are provided, you are expected to create them!!
+
+D - Data Structures
+  -Thinking about how data should be represented and manipulated is a great first step for determining the best algorithm to use.
+  -Help to reason with the data in a more methodical manner
+  -Provide methods for interacting with the data at an implementation level
+
+-Think about the data you are provided and the data you need to output, and the operations you will need to use to get there.
+  -In determining the data structure, you start to get an understanding of where you will need to go with your algorithm.
+  
+A - Algorithm (follows naturally from data structures)
+  -A logical sequence of steps to accomplish the objective.
+  -Think of the algorithm as the way to manipulate the input in order to produce the output.
+
+  -Start at a high level: Avoid code or pseudocode at this point.
+  -You can certainly re visit your algorithm during the implementation step to update it or rethink.
+  
+  -Once a high level algorithm has been created, check the steps and see if any are largely complicated.
+  -If so, consider extracting those complicated steps to new problems, and do a miniature PEDAC for each.
+    -The nice thing about PEDAC seems to be that it can scale to different sizes of problem.
+  -Some substeps are fine, but use good judgement for particularly complex issues.
+  
+C - Implementing a solution in code
+  -Code with intent: Follow your plan and translate the written algorithm to code.
+  -First thing: Think of the solution algorithm and how it fits into the language we will use.
+    -What methods and features are available to us? Plug these in to additional implementation notes.
+  -As the solution is worked, whether to refactor the algorithm depends on a number of factors.
+  
+-PEDAC is not a completely linear process, you must move around between the steps
+  -Or even move back from coding mode to abstract problem solving mode at times
+-Be sure not to try to problem solve at the code level.

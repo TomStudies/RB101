@@ -1,0 +1,16 @@
+Selection and Transformation:
+
+Outside of iteration, the two most common actions to perform on a collection are selection and transformation.
+  Retrieving specific elements from a collection based on certain criteria is selection. Can involve less than the full amount.
+  Manipulating ALL the elements in a collection is transformation. Always will affect all elements.
+  
+Both selection and transformation are built upon the foundations of looping.
+  For selection example, a loop that checks if each character in a string is 'g', and assigns those 'g's to a new string.
+  For transformation example, a loop that goes through an array of strings and appends an 's' to all of them.
+
+When performing transformations, always keep your mind on whether the original elements are being mutated or not.
+
+Many times, we will move selection and transformation operations to methods as they are highly specific.
+
+
+  

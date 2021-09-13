@@ -1,0 +1,7 @@
+If you mutate the object used to call #each from within the block, it is NOT guaranteed that each will run the same amount of times as objects in the collection.
+
+When map is called with a block on a hash, the return method is an ARRAY.
+
+Enumerable#find_all returns a nested array when called on a hash.
+
+Be careful with &&, || statements when using reject.
