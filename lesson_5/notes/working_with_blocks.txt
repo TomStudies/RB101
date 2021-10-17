@@ -1,0 +1,64 @@
+Working with Blocks
+
+Example 3 Breakdown
+Action: method call(map) on the outer array. No side effect. Returns new array [1, 3]. Return value not used.
+Action: block execution on each sub array. Returns 1 then 3. Used to transform the array to be returned.
+Action: method call (first) on each sub array. Returns arr[0] for each arr. Used by puts.
+Action: method call (puts) on arr[0]. Outputs the integer as a string to the console. Returns nil, not used.
+Action: method call (first) on each sub array. Returns arr[0] for each arr. Used to determine the return value of the block.
+
+Example 4 Breakdown
+-Line 1: Declaration of my_arr. No side effect. Returns the result of the assignment, not used.
+-Line 1: method call (each) on the outer array. No side effect. Returns the calling object. Return value assigned to my_arr.
+-Line 1-7: block execution on each sub array. Returns nil, goes unused. **CORRECTION: Returns each sub array, which goes unused.
+-Line 2: method call (each) on each array passed to the block. No side effect. Returns the calling array, unused. **CORRECTION: Rerturn calling object is used to determine the return value of the outer block.
+-Line 2-6: block execution on each number in the arrays. Returns nil, goes unused.
+-CORRECTION: Line 3: Comparison on whatever particular element is being examined. No side effect, returns nil, unused.
+-Line 3-5: if statement to see if the number is > 5. No side effect. Returns nil, which is used to determine the return value of the inner block.
+-Line 4: method call (puts) on num. Outputs num. Returns nil, not used. **CORRECTION: The return value is used to determine the return value of the conditional statement if true.
+Output:
+18
+7
+12
+return value: [[18, 7], [3, 12]]
+
+Example 5 Breakdown
+-Line 1: Method call (map) on the outer array. No side effect. Returns an array with each element replaced by the arrays returned by the block. Unused.
+-Line 1-5: Block execution on each sub array. No side effect. Returns the array returned by the internal map, used by the external map.
+-Line 2: Method call (map) on the sub array. No side effect. Returns an array of the numbers returned by the block, used to determine the return value of the outer block.
+-Line 2-4: Block execution on each element of the sub array. No side effect. Returns the result of the multiplication, which is inserted into the sub array in place of the original num.
+-Line 3: Multiplies the element by three. No side effect. Returns the result of the mathematic operation. Used to determine the return value of the block.
+No output
+Return value: [[2, 4], [6, 8]]
+(All correct)
+
+Example 6 Breakdown
+*Don't have to break it down in as much detail as the others.
+Notes: Enumerable#select returns an array of the elements for which the block returns a truthy value
+Enumerable#all? retrurns true or false depending on whether the block returns a truthy value for every element.
+Return value: [{c: 'cat'}]
+*If we used Enumerable#any? instead of #all?, the first hash would also be included.
+
+Example 7 Breakdown
+sort_by sorts the external array by the mapped array of integers as returned by the block.
+**This one is confusing for me. I will need to do the line by line breakdown for this one.
+-Line 1: Method call (sort_by) on the outer array. No side effect. Returns an array of the sub arrays (of strings), sorted according to the array of integers returned by the block. **This is the confusing part for me.
+-Line 1-5: Block execution on each sub array. No side effect. Returns the array returned by the map call on line 2. Used by the sort_by method to determine the correct order for the strings.
+-Line 2: Method call (map) on each sub array. No side effect. Returns an array whose values are the integer forms of the strings. Used to determine the return value of the block.
+-Line 2-4: Block execution on each element in each sub array. No side effect. Returns the result of the method call on line 3 (integer). Used by the map call.
+-Line 3: Method call (to_i) on each string element of each sub array. No side effect. Returns the integer form of the string in question, used to determine the return value of the inner block.
+
+Example 8 Breakdown
+Notable points: We hold off on using the select method until after accessing the internal arrays via map.
+item.to_s.to_i == item is an imperfect but convenient way to check whether an item is an integer or a string
+map is used because it has the correct kind of return value (each would perform functionally the same but wouldn't return the desired array)
+
+Example 9 Breakdown
+Notable points: Just having the each on line 2, we should know that an each just returns itself. Therefore the whole thing will just return the original 3 layer array.
+partition, when none of the elements evaluate to false, returns an empty array for the false items: [[true_items], []]
+
+Example 10 Breakdown
+Uses element.to_s.size == 1 to check if it is an integer, only works for integers below 10 but works for the purposes of the problem at hand.
+
+Last note:
+DO NOT MUTATE COLLECTIONS YOU ARE ITERATING THROUGH. Avoid using .delete, make shallow copies when applicable, etc.

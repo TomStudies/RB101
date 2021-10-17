@@ -1,0 +1,44 @@
+Sorting
+
+Sorting is mostly performed on arrays, as an index makes sorting important.
+
+Strings can be converted to an array and then sorted.
+
+Because hash values are accessed via keys sorting them is generally not done (but can be after ruby 1.9)
+
+Ruby provides a few methods to do complex sorting work.
+  -Array#sort and Array#sort_by
+  
+Comparison:
+  -Sorting is done by comparing items with each other and ordering them based on the results of the comparison.
+
+How does Ruby know how to order items when sorting a collection?
+  -Array#sort uses the <=> method (aka the spaceship operator) to compare items.
+  
+x <=> y returns -1 if x < y, 0 if x = y, and 1 if x > y.
+  -Returns nil if the two objects cannot be compared (e.g. comparing a string and an int)
+  
+Array#sort evaluates the result of <=>.
+  -What kind of <=> depends on the object types being compared.
+  -String#<=> performs based on the character's position in the ASCII table.
+    -'A' <=> 'a' => -1, 'A' precedes 'a' in ASCII order so the value of 'A' is less than that of 'a'.
+    -String#ord returns the ASCII position of the string.
+    -digits and most punctuation < upper case < lower case (check ASCII table or extended ASCII table for others)
+  -Integer#<=> operates basically as expected
+
+Array#sort can also be called with a block, with two arguments (the items to be compared.)
+  -For example, [].sort { |a, b| b <=> a } would reverse the order of the default sort.
+  -So long as the block returns -1, 0, 1, or nil; whatever you want can be put in the block.
+
+Array#sort_by is similar to sort, but is called with a block that determines the method of comparison.
+  -For instance ['cot', 'bed', 'mat'].sort_by { |word| word[1] } would sort by the character at index 1 of the word and return ['mat', 'bed', 'cot'].
+
+There is also a Hash#sort_by wherein two argumnents must be passed for the key and value.
+  -It however returns an array, so Array#to_h must be called on it afterwards.
+  -Symbol#<=> essentially converts the symbols to strings before comparing alphabetically.
+
+Destructive versions of Array#sort and Array#sort_by exist (sort!, sort_by!)
+
+Many other methods use comparison: see Enumerable#(max, min, minmax, minmax_by, etc)
+
+When sorting collections, you must know if and how the objects in question implement a <=> method.
