@@ -1,0 +1,60 @@
+Bugs are human errors in code.
+Debugging is the process of identifying and fixing human errors.
+If you wrote the code, you put the bug there.
+
+How do we debug code?
+  1. Identify the problem (track down the line of code, method, etc)
+  2. Understand the problem (why does it happen? Look at the context around it.)
+  3. Implement a solution (change the code and eliminate the bug.)
+
+Types of error:
+  1. Syntax
+    A. Code that you have written does not conform to the language rules.
+    B. Generally stops code from running.
+  2. Logical
+    A. Code you have written does not follow the logic of the goal in mind.
+    B. Code runs, but produces unexpected results.
+    C. Hardest to fix, and that which we will examine using pry.
+
+binding.pry stops the execution of the program at a point and allows you to
+evaluate the current state of variables, etc.
+
+What is pry?
+  1. Pry is a Rubygem, which must be installed (gem install pry)
+    A. It must be required in the program file to use.
+  2. Pry is a REPL: Read Evaluate Print Loop.
+    A. An instructive environment.
+      a. It takes user input,
+      b. Evaluates the input
+      c. Prints an output
+      d. Loops
+
+pry can be accessed by the terminal much the same way as irb.
+In pry, cd command changes scope between main and variables.
+ls lists usable methods.
+show-doc lists further information about the methods.
+
+We can use binding.pry to help debug.
+  A binding is something that contains references to any variables in scope when
+  it was created.
+  2. Pry interrupts the program execution and pries open the binding to allow us
+  to look around.
+  3. When deciding where to put binding.pry, remember hoisting behavior:
+  same line variables will be known to exist but not what they are.
+  4. If called within a method, binding.pry can only access the method.
+    A. Putting a binding.pry at the end of a method will effect the return.
+  5. If binding.pry is placed in a loop, type exit to move to the next instance.
+  6. whereami command shows where in the code you are when using pry
+    A. whereami 15 will show a5 lines above and below the binding.pry, etc
+  7. binding.pry can be used to verify problem requirements against examples.
+
+pry-byebug extends pry with additional commands.
+  1. You must require "pry-byebug".
+  2. Adds next, a very useful command for stepping through code.
+  3. continue moves to the next situation(?)
+  4. step steps into a method
+
+Take-Aways
+  1. Debugging is extremely important to be familiar with
+  2. Using tools to make debugging easier helps to improve code familiarity
+  3. Debugging concepts and tools are not limited to Ruby
